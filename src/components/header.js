@@ -4,10 +4,19 @@ function Header() {
       <div>
         <p className="text-white text-2xl font-bold">Vertex MM Rewards</p>
         <p className="text-gray-1">
-          Details about MM Program can be found here
+          Details about MM Program can be found{" "}
+          <a
+            href="https://vertex-protocol.gitbook.io/docs/community-token-and-dao/trading-rewards"
+            target="_blank"
+            rel="noreferrer"
+            className="underline font-medium"
+          >
+            here
+          </a>
+          .
         </p>
       </div>
-      <div className="flex gap-2">
+      <div className="flex gap-4">
         <div>
           <label for="market" class="block mb-1 font-medium text-gray-1">
             Market
