@@ -2,7 +2,7 @@ function Header() {
   // TODO: set state for Market and Interval dropdown
   // TODO: fetchData given market and interval state
   return (
-    <div className="flex justify-between mx-4">
+    <div className="flex justify-between">
       <div>
         <p className="text-white text-2xl font-bold">Vertex MM Rewards</p>
         <p className="text-gray-1">
@@ -11,7 +11,7 @@ function Header() {
             href="https://vertex-protocol.gitbook.io/docs/community-token-and-dao/trading-rewards"
             target="_blank"
             rel="noreferrer"
-            className="underline font-medium"
+            className="underline font-medium hover:text-white"
           >
             here
           </a>

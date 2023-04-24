@@ -6,7 +6,7 @@ function TopDashboard() {
   const data = useSelector((state) => state.data);
 
   return (
-    <div className="grid md:grid-cols-3 gap-4 grid-cols-1 mt-8 mx-4">
+    <div className="grid md:grid-cols-3 gap-4 grid-cols-1 mt-8">
       <div className="bg-gray-3 border border-gray-2 rounded">
         <div className="flex justify-between mx-2 mt-2">
           <p className="text-gray-1 font-medium">Current Epoch</p>
