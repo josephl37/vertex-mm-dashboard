@@ -1,4 +1,6 @@
 function Header() {
+  // TODO: set state for Market and Interval dropdown
+  // TODO: fetchData given market and interval state
   return (
     <div className="flex justify-between mx-4">
       <div>
@@ -18,12 +20,12 @@ function Header() {
       </div>
       <div className="flex gap-4">
         <div>
-          <label for="market" class="block mb-1 font-medium text-gray-1">
+          <label htmlFor="market" className="block mb-1 font-medium text-gray-1">
             Market
           </label>
           <select
             id="market"
-            class="bg-gray-3 border border-gray-2 text-gray-1 text-sm rounded block w-full p-2"
+            className="bg-gray-3 border border-gray-2 text-gray-1 text-sm rounded block w-full p-2"
           >
             <option value="1">BTC-Spot</option>
             <option value="2">BTC-Perp</option>
@@ -32,21 +34,21 @@ function Header() {
           </select>
         </div>
         <div>
-          <label for="interval" class="block mb-1 font-medium text-gray-1">
+          <label htmlFor="interval" className="block mb-1 font-medium text-gray-1">
             Interval
           </label>
           <select
             id="interval"
-            class="bg-gray-3 border border-gray-2 text-gray-1 text-sm rounded block w-full p-2"
+            className="bg-gray-3 border border-gray-2 text-gray-1 text-sm rounded block w-full p-2"
           >
             <option value="1">Past 15 Minutes</option>
             <option value="2">Past 1 Hour</option>
             <option value="3">Past 4 Hours</option>
             <option value="4">Past 1 Day</option>
-            <option value="4">Past 2 Days</option>
-            <option value="4">Past 1 Week</option>
-            <option value="4">Past 1 Month</option>
-            <option value="4">Past 3 Months</option>
+            <option value="5">Past 2 Days</option>
+            <option value="6">Past 1 Week</option>
+            <option value="7">Past 1 Month</option>
+            <option value="8">Past 3 Months</option>
           </select>
         </div>
       </div>

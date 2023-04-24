@@ -1,7 +1,10 @@
 import { Tooltip } from "react-tooltip";
 import infoSvg from "../public/information-circle.svg";
+import { useSelector } from "react-redux";
 
 function TopDashboard() {
+  const data = useSelector((state) => state.data);
+
   return (
     <div className="grid md:grid-cols-3 gap-4 grid-cols-1 mt-8 mx-4">
       <div className="bg-gray-3 border border-gray-2 rounded">
@@ -29,7 +32,9 @@ function TopDashboard() {
           />
         </div>
         <div className="flex justify-center mt-4 mb-6">
-          <p className="text-white text-6xl font-medium">3.13</p>
+          <p className="text-white text-6xl font-medium">
+            {data.reward_coefficient}
+          </p>
         </div>
       </div>
       <div className="bg-gray-3 border border-gray-2 rounded">
@@ -43,7 +48,9 @@ function TopDashboard() {
           />
         </div>
         <div className="flex justify-center mt-4 mb-6">
-          <p className="text-white text-6xl font-medium">12</p>
+          <p className="text-white text-6xl font-medium">
+            {data?.makers_statistics?.length}
+          </p>
         </div>
       </div>
       <Tooltip
@@ -52,6 +59,7 @@ function TopDashboard() {
           backgroundColor: "rgb(42, 42, 47)",
           color: "#A2A2A6",
           opacity: 1,
+          boxShadow: "0px 2px 6px rgba(0, 0, 0, 0.5)",
         }}
         place="bottom"
       />
