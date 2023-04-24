@@ -1,4 +1,5 @@
 import infoSvg from "../public/information-circle.svg";
+import ExpectedRewards from "./expectedRewards";
 
 function BottomDashboard() {
   return (
@@ -9,6 +10,9 @@ function BottomDashboard() {
             Expected Rewards per MM ($VRTX)
           </p>
           <img src={infoSvg} alt="info" />
+        </div>
+        <div className="mx-2">
+          <ExpectedRewards />
         </div>
       </div>
       <div className="bg-gray-3 border border-gray-2 rounded">

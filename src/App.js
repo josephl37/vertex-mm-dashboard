@@ -5,7 +5,6 @@ import TopDashboard from "./components/top-dashboard";
 import { useDispatch } from "react-redux";
 
 function App() {
-  //TODO: fetch data
   const dispatch = useDispatch();
   dispatch(fetchData());
   return (

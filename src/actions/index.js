@@ -6,7 +6,6 @@ const base = "http://localhost:4000";
 export function fetchData() {
   return (dispatch) => {
     axios.get(`${base}/makers_statistics_response`).then((response) => {
-      console.log(response);
       dispatch({
         type: FETCH_DATA,
         payload: response.data,
