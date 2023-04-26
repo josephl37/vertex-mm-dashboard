@@ -4,6 +4,7 @@ import BottomDashboard from "./components/bottom-dashboard";
 import Header from "./components/header";
 import TopDashboard from "./components/top-dashboard";
 import { useDispatch } from "react-redux";
+import Signature from "./components/signature";
 
 function App() {
   // TODO: set state for market
@@ -18,6 +19,7 @@ function App() {
       <Header interval={interval} setInterval={setInterval}/>
       <TopDashboard />
       <BottomDashboard interval={interval}/>
+      <Signature />
     </div>
   );
 }

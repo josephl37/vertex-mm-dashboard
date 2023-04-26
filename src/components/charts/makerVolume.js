@@ -11,7 +11,7 @@ import { convertData, timeFormat, getFormattedTime } from "../../utils";
 
 function RewardShare({ interval }) {
   const response = useSelector((state) => state.data.makers_statistics);
-  const data = response ? convertData(response, "share") : null;
+  const data = response ? convertData(response, "maker_volume") : null;
 
   const keys = data
     ? Object.keys(data[0]).filter((k) => k !== "timestamp")

@@ -13,8 +13,6 @@ function ExpectedRewards({ interval }) {
   const response = useSelector((state) => state.data.makers_statistics);
   const data = response ? convertData(response, "expected_reward") : null;
 
-  console.log(data);
-
   const keys = data
     ? Object.keys(data[0]).filter((k) => k !== "timestamp")
     : null;

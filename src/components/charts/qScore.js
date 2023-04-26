@@ -1,17 +1,17 @@
 import {
-  AreaChart,
-  Area,
+  LineChart,
   XAxis,
   YAxis,
   Tooltip,
   ResponsiveContainer,
+  Line,
 } from "recharts";
 import { useSelector } from "react-redux";
 import { convertData, timeFormat, getFormattedTime } from "../../utils";
 
-function RewardShare({ interval }) {
+function MarketUptime({ interval }) {
   const response = useSelector((state) => state.data.makers_statistics);
-  const data = response ? convertData(response, "share") : null;
+  const data = response ? convertData(response, "q_score") : null;
 
   const keys = data
     ? Object.keys(data[0]).filter((k) => k !== "timestamp")
@@ -31,7 +31,7 @@ function RewardShare({ interval }) {
     return (
       <>
         <ResponsiveContainer>
-          <AreaChart
+          <LineChart
             data={data}
             margin={{
               top: 20,
@@ -47,20 +47,19 @@ function RewardShare({ interval }) {
               domain={["dataMin", "dataMax"]}
               tickFormatter={timeFormat(interval)}
             />
-            <YAxis tickFormatter={(c) => `${c * 100}%`} />
+            <YAxis tickFormatter={(c) => c.toString().replace(/000000$/, "M")} />
             <Tooltip
               content={<CustomTooltip interval={interval} colors={colors} />}
             />
             {keys.map((key, index) => (
-              <Area
+              <Line
                 key={key}
                 dataKey={key}
-                stackId="1"
                 stroke={colors[index % colors.length]}
                 fill={colors[index % colors.length]}
               />
             ))}
-          </AreaChart>
+          </LineChart>
         </ResponsiveContainer>
       </>
     );
@@ -93,7 +92,7 @@ function CustomTooltip({ active, payload, label, interval, colors }) {
                 className="w-4 h-4 mr-4 mt-1"
                 style={{ backgroundColor: color }}
               ></span>
-              {entry.name}: {((entry.value) * 100).toFixed(2)}%
+              {entry.name}: {(entry.value)}
             </div>
           ))}
       </div>
@@ -102,4 +101,4 @@ function CustomTooltip({ active, payload, label, interval, colors }) {
   return null;
 }
 
-export default RewardShare;
+export default MarketUptime;
