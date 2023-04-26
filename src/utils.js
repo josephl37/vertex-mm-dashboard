@@ -44,10 +44,15 @@ export function timeFormat(interval) {
       minute: "numeric",
       }).format(t);
     case 604800:
-    case 2630000:
       return (t) =>
       new Intl.DateTimeFormat("en-US", {
       weekday: "short",
+      day: "numeric",
+      }).format(t);
+    case 2630000:
+      return (t) =>
+      new Intl.DateTimeFormat("en-US", {
+      month: "short",
       day: "numeric",
       }).format(t);
     case 7890000:
@@ -61,5 +66,30 @@ export function timeFormat(interval) {
       hour: "numeric",
       minute: "numeric",
       }).format(t);
+  }
+}
+
+export function getFormattedTime(interval) {
+  switch (interval) {
+    case 900:
+    case 3600:
+    case 14400:
+    case 86400:
+    case 172800:
+      return new Intl.DateTimeFormat("en-US", {
+        timeStyle: "short",
+        dateStyle: "short",
+      });
+    case 604800:
+    case 2630000:
+    case 7890000:
+      return new Intl.DateTimeFormat("en-US", {
+        dateStyle: "long",
+      });
+    default:
+      return new Intl.DateTimeFormat("en-US", {
+        timeStyle: "short",
+        dateStyle: "short",
+      });
   }
 }

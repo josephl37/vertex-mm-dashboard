@@ -9,6 +9,7 @@ module.exports = {
       'gray-2': '#323237',
       'gray-3': '#1D1D22',
       'gray-4': '#17151D',
+      'tooltip-gray': '#2A2A2F'
     }
   },
   plugins: [],

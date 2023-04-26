@@ -1,5 +1,6 @@
 import infoSvg from "../public/information-circle.svg";
-import ExpectedRewards from "./expectedRewards";
+import ExpectedRewards from "./charts/expectedRewards";
+import RewardShare from "./charts/rewardShare";
 
 function BottomDashboard({interval}) {
   return (
@@ -19,6 +20,9 @@ function BottomDashboard({interval}) {
         <div className="flex justify-between my-2 mx-2">
           <p className="text-gray-1 font-medium">Reward Share for Market (%)</p>
           <img src={infoSvg} alt="info" />
+        </div>
+        <div className="h-96 w-full">
+          <RewardShare interval={interval}/>
         </div>
       </div>
       <div className="bg-gray-3 border border-gray-2 rounded">
