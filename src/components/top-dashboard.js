@@ -14,7 +14,7 @@ function TopDashboard() {
             src={infoSvg}
             alt="info"
             data-tooltip-id="my-tooltip"
-            data-tooltip-html="Each epoch lasts 28 days.<br />There are a total of 6 epochs."
+            data-tooltip-html="An epoch lasts for 28 days.<br />There are a total of 6 epochs."
           />
         </div>
         <div className="flex justify-center mt-4 mb-6">
@@ -44,7 +44,7 @@ function TopDashboard() {
             src={infoSvg}
             alt="info"
             data-tooltip-id="my-tooltip"
-            data-tooltip-html="The total amount of market makers<br />in a given market."
+            data-tooltip-html="The total amount of market makers<br />for each market in the current epoch."
           />
         </div>
         <div className="flex justify-center mt-4 mb-6">
