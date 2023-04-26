@@ -41,14 +41,14 @@ function Header() {
             id="interval"
             className="bg-gray-3 border border-gray-2 text-gray-1 text-sm rounded block w-full p-2"
           >
-            <option value="1">Past 15 Minutes</option>
-            <option value="2">Past 1 Hour</option>
-            <option value="3">Past 4 Hours</option>
-            <option value="4">Past 1 Day</option>
-            <option value="5">Past 2 Days</option>
-            <option value="6">Past 1 Week</option>
-            <option value="7">Past 1 Month</option>
-            <option value="8">Past 3 Months</option>
+            <option value="900">Past 15 Minutes</option>
+            <option value="3600">Past 1 Hour</option>
+            <option value="14400">Past 4 Hours</option>
+            <option value="86400">Past 1 Day</option>
+            <option value="172800">Past 2 Days</option>
+            <option value="604800">Past 1 Week</option>
+            <option value="2630000">Past 1 Month</option>
+            <option value="7890000">Past 3 Months</option>
           </select>
         </div>
       </div>

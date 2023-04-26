@@ -1,25 +1,31 @@
+import truncateEthAddress from "truncate-eth-address";
+
 export function convertData(response, key) {
-  let convertedData = [];
+  let groupedData = {};
 
   response.forEach(obj => {
-    let address = obj.address;
+    let address = truncateEthAddress(obj.address);
 
     obj.data.forEach(dataObj => {
       let timestamp = dataObj.timestamp;
       let value = dataObj[key];
 
-      if (!convertedData.some(item => item.timestamp === timestamp)) {
-        let newTimestampObj = {timestamp};
-        newTimestampObj[address] = value;
-        convertedData.push(newTimestampObj);
-      } else {
-        convertedData.forEach(item => {
-          if (item.timestamp === timestamp) {
-            item[address] = value;
-          }
-        });
+      let date = (timestamp * 1000);
+
+      if (!groupedData[date]) {
+        groupedData[date] = {};
       }
+
+      groupedData[date][address] = value;
     });
+  });
+
+  let convertedData = [];
+
+  Object.keys(groupedData).forEach(timestamp => {
+    let dataObj = groupedData[timestamp];
+    dataObj.timestamp = timestamp;
+    convertedData.push(dataObj);
   });
 
   return convertedData;
