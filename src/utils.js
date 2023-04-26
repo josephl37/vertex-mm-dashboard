@@ -30,3 +30,36 @@ export function convertData(response, key) {
 
   return convertedData;
 }
+
+export function timeFormat(interval) {
+  switch (interval) {
+    case 900:
+    case 3600:
+    case 14400:
+    case 86400:
+    case 172800:
+      return (t) =>
+      new Intl.DateTimeFormat("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      }).format(t);
+    case 604800:
+    case 2630000:
+      return (t) =>
+      new Intl.DateTimeFormat("en-US", {
+      weekday: "short",
+      day: "numeric",
+      }).format(t);
+    case 7890000:
+      return (t) =>
+      new Intl.DateTimeFormat("en-US", {
+      month: "short",
+      }).format(t);
+    default:
+      return (t) =>
+      new Intl.DateTimeFormat("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      }).format(t);
+  }
+}

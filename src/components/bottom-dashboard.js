@@ -1,7 +1,7 @@
 import infoSvg from "../public/information-circle.svg";
 import ExpectedRewards from "./expectedRewards";
 
-function BottomDashboard() {
+function BottomDashboard({interval}) {
   return (
     <div className="grid md:grid-cols-2 grid-cols-1 gap-4 mt-4">
       <div className="bg-gray-3 border border-gray-2 rounded">
@@ -12,7 +12,7 @@ function BottomDashboard() {
           <img src={infoSvg} alt="info" />
         </div>
         <div className="h-96 w-full">
-          <ExpectedRewards />
+          <ExpectedRewards interval={interval}/>
         </div>
       </div>
       <div className="bg-gray-3 border border-gray-2 rounded">

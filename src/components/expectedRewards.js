@@ -7,9 +7,9 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useSelector } from "react-redux";
-import { convertData } from "../utils";
+import { convertData, timeFormat } from "../utils";
 
-function ExpectedRewards() {
+function ExpectedRewards({interval}) {
   const response = useSelector((state) => state.data.makers_statistics);
   const data = response ? convertData(response, "expected_reward") : null;
 
@@ -42,14 +42,10 @@ function ExpectedRewards() {
           >
             <XAxis
               dataKey="timestamp"
-              scale="auto"
-              tickCount={4}
-              tickFormatter={(t) =>
-                new Intl.DateTimeFormat('en-US', {
-                  minute: 'numeric',
-                  hour: 'numeric'
-                }).format(t)
-              }
+              scale="time"
+              type="number"
+              domain={['dataMin', 'dataMax']}
+              tickFormatter={timeFormat(interval)}
             />
             <YAxis tickFormatter={(c) => c.toString().replace(/000$/, "K")} />
             <Tooltip

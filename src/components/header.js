@@ -1,6 +1,10 @@
-function Header() {
-  // TODO: set state for Market and Interval dropdown
+function Header({interval, setInterval}) {
   // TODO: fetchData given market and interval state
+  const handleIntervalChange = (event) => {
+    const selectedInterval = parseInt(event.target.value);
+    setInterval(selectedInterval);
+  }
+
   return (
     <div className="flex justify-between">
       <div>
@@ -40,6 +44,8 @@ function Header() {
           <select
             id="interval"
             className="bg-gray-3 border border-gray-2 text-gray-1 text-sm rounded block w-full p-2"
+            onChange={handleIntervalChange}
+            value={interval}
           >
             <option value="900">Past 15 Minutes</option>
             <option value="3600">Past 1 Hour</option>
