@@ -26,7 +26,11 @@ function MarketUptime({ interval }) {
   ];
 
   if (data === null) {
-    return <div>Loading...</div>;
+    return (
+      <div className="text-gray-1 flex items-center justify-center h-full">
+        <p className="text-center">Data is unavailable</p>
+      </div>
+    );  
   } else {
     return (
       <>

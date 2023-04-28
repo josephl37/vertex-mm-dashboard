@@ -13,6 +13,9 @@ function ExpectedRewards({ interval }) {
   const response = useSelector((state) => state.data.makers_statistics);
   const data = response ? convertData(response, "expected_reward") : null;
 
+  console.log(response);
+  console.log(data);
+
   const keys = data
     ? Object.keys(data[0]).filter((k) => k !== "timestamp")
     : null;
@@ -26,7 +29,11 @@ function ExpectedRewards({ interval }) {
   ];
 
   if (data === null) {
-    return <div>Loading...</div>;
+    return (
+      <div className="text-gray-1 flex items-center justify-center h-full">
+        <p className="text-center">Data is unavailable</p>
+      </div>
+    );
   } else {
     return (
       <>
