@@ -4,6 +4,7 @@ import ExpectedRewards from "./charts/expectedRewards";
 import RewardShare from "./charts/rewardShare";
 import MakerVolume from "./charts/makerVolume";
 import MarketUptime from "./charts/marketUptime";
+import SumQScore from "./charts/sumQscore";
 import QScore from "./charts/qScore";
 
 function BottomDashboard({interval}) {
@@ -69,6 +70,18 @@ function BottomDashboard({interval}) {
         </div>
         <div className="h-96 w-full">
           <QScore interval={interval}/>
+        </div>
+      </div>
+      <div className="bg-gray-3 border border-gray-2 rounded">
+        <div className="flex justify-between my-2 mx-2">
+          <p className="text-gray-1 font-medium">Sum Q Score</p>
+          <img src={infoSvg} alt="info"
+          data-tooltip-id="chart-tooltip"
+          data-tooltip-html="need definition"
+          />
+        </div>
+        <div className="h-96 w-full">
+          <SumQScore interval={interval}/>
         </div>
       </div>
       <Tooltip
