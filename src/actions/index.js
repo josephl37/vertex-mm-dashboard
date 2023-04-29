@@ -1,24 +1,13 @@
 import axios from "axios";
 export const FETCH_DATA = "FETCH_DATA";
 
-const base = "http://localhost:4000";
+const base = "https://test.vertexprotocol-backend.com";
 
-export function fetchData() {
-  return (dispatch) => {
-    axios.get(`${base}/makers_statistics_response`).then((response) => {
-      dispatch({
-        type: FETCH_DATA,
-        payload: response.data,
-      });
-    });
-  };
-}
-
-/* Use for actual endpoint
 export function fetchData(market, interval) {
   return dispatch => {
     axios.post(`${base}/indexer`, {
-      makers_statistics: {
+      maker_statistics: {
+        epoch: 2,
         product_id: market,
         interval: interval
       }
@@ -35,4 +24,3 @@ export function fetchData(market, interval) {
       })
   };
 }
-*/

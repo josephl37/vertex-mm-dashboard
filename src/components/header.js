@@ -1,8 +1,13 @@
-function Header({interval, setInterval}) {
+function Header({interval, setInterval, market, setMarket}) {
   // TODO: fetchData given market and interval state
   const handleIntervalChange = (event) => {
     const selectedInterval = parseInt(event.target.value);
     setInterval(selectedInterval);
+  }
+
+  const handleMarketChange = (event) => {
+    const selectedMarket = parseInt(event.target.value);
+    setMarket(selectedMarket);
   }
 
   return (
@@ -30,6 +35,8 @@ function Header({interval, setInterval}) {
           <select
             id="market"
             className="bg-gray-3 border border-gray-2 text-gray-1 text-sm rounded block w-full p-2"
+            onChange={handleMarketChange}
+            value={market}
           >
             <option value="1">BTC-Spot</option>
             <option value="2">BTC-Perp</option>

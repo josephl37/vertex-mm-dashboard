@@ -10,8 +10,8 @@ import { useSelector } from "react-redux";
 import { convertData, timeFormat, getFormattedTime } from "../../utils";
 
 function RewardShare({ interval }) {
-  const response = useSelector((state) => state.data.makers_statistics);
-  const data = response ? convertData(response, "maker_volume") : null;
+  const response = useSelector((state) => state.data.makers);
+  const data = response ? convertData(response, "maker_fee") : null;
 
   const keys = data
     ? Object.keys(data[0]).filter((k) => k !== "timestamp")
@@ -85,24 +85,29 @@ function CustomTooltip({ active, payload, label, interval, colors }) {
         <div className="font-bold text-white mb-1">
           {timeFormat.format(label)}
         </div>
-        {payload
-          .map((entry, index) => ({
-            entry,
-            color: colors[index % colors.length],
-          }))
-          .reverse()
-          .map(({ entry, color }, index) => (
-            <div key={`item-${index}`} className="flex">
-              <span
-                className="w-4 h-4 mr-4 mt-1"
-                style={{ backgroundColor: color }}
-              ></span>
-              {entry.name}: {((entry.value) * 100).toFixed(2)}%
-            </div>
-          ))}
+        {payload && payload.length > 0 ? (
+          payload
+            .map((entry, index) => ({
+              entry,
+              color: colors[index % colors.length],
+            }))
+            .reverse()
+            .map(({ entry, color }, index) => (
+              <div key={`item-${index}`} className="flex">
+                <span
+                  className="w-4 h-4 mr-4 mt-1"
+                  style={{ backgroundColor: color }}
+                ></span>
+                {entry.name}: {(entry.value * 100).toFixed(2)}%
+              </div>
+            ))
+        ) : (
+          <div>No data available.</div>
+        )}
       </div>
     );
   }
+
   return null;
 }
 

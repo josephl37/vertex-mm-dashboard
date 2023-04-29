@@ -9,8 +9,8 @@ import {
 import { useSelector } from "react-redux";
 import { convertData, timeFormat, getFormattedTime } from "../../utils";
 
-function MarketUptime({ interval }) {
-  const response = useSelector((state) => state.data.makers_statistics);
+function QScore({ interval }) {
+  const response = useSelector((state) => state.data.makers);
   const data = response ? convertData(response, "q_score") : null;
 
   const keys = data
@@ -30,7 +30,7 @@ function MarketUptime({ interval }) {
       <div className="text-gray-1 flex items-center justify-center h-full">
         <p className="text-center">Data is unavailable</p>
       </div>
-    );  
+    );
   } else {
     return (
       <>
@@ -51,7 +51,9 @@ function MarketUptime({ interval }) {
               domain={["dataMin", "dataMax"]}
               tickFormatter={timeFormat(interval)}
             />
-            <YAxis tickFormatter={(c) => c.toString().replace(/000000$/, "M")} />
+            <YAxis
+              tickFormatter={(c) => c.toString().replace(/000000$/, "M")}
+            />
             <Tooltip
               content={<CustomTooltip interval={interval} colors={colors} />}
             />
@@ -59,6 +61,7 @@ function MarketUptime({ interval }) {
               <Line
                 key={key}
                 dataKey={key}
+                dot={false}
                 stroke={colors[index % colors.length]}
                 fill={colors[index % colors.length]}
               />
@@ -84,25 +87,30 @@ function CustomTooltip({ active, payload, label, interval, colors }) {
         <div className="font-bold text-white mb-1">
           {timeFormat.format(label)}
         </div>
-        {payload
-          .map((entry, index) => ({
-            entry,
-            color: colors[index % colors.length],
-          }))
-          .reverse()
-          .map(({ entry, color }, index) => (
-            <div key={`item-${index}`} className="flex">
-              <span
-                className="w-4 h-4 mr-4 mt-1"
-                style={{ backgroundColor: color }}
-              ></span>
-              {entry.name}: {(entry.value)}
-            </div>
-          ))}
+        {payload && payload.length > 0 ? (
+          payload
+            .map((entry, index) => ({
+              entry,
+              color: colors[index % colors.length],
+            }))
+            .reverse()
+            .map(({ entry, color }, index) => (
+              <div key={`item-${index}`} className="flex">
+                <span
+                  className="w-4 h-4 mr-4 mt-1"
+                  style={{ backgroundColor: color }}
+                ></span>
+                {entry.name}: {entry.value}
+              </div>
+            ))
+        ) : (
+          <div>No data available.</div>
+        )}
       </div>
     );
   }
+
   return null;
 }
 
-export default MarketUptime;
+export default QScore;

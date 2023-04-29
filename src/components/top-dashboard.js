@@ -33,7 +33,7 @@ function TopDashboard() {
         </div>
         <div className="flex justify-center mt-4 mb-6">
           <p className="text-white text-6xl font-medium">
-            {data.reward_coefficient}
+            {(data.reward_coefficient)?.toFixed(2)}
           </p>
         </div>
       </div>
@@ -49,7 +49,7 @@ function TopDashboard() {
         </div>
         <div className="flex justify-center mt-4 mb-6">
           <p className="text-white text-6xl font-medium">
-            {data?.makers_statistics?.length}
+            {data?.makers?.length}
           </p>
         </div>
       </div>

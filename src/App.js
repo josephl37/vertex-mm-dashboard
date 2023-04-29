@@ -7,18 +7,23 @@ import { useDispatch } from "react-redux";
 import Signature from "./components/signature";
 
 function App() {
-  // TODO: set state for market
-  const [interval, setInterval] = useState();
+  const [market, setMarket] = useState(1);
+  const [interval, setInterval] = useState(900);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchData());
-  }, [dispatch]);
+    dispatch(fetchData(market, interval));
+  }, [dispatch, market, interval]);
   return (
     <div className="mt-10 lg:w-5/6 sm:w-full lg:mx-auto mx-4">
-      <Header interval={interval} setInterval={setInterval}/>
+      <Header
+        interval={interval}
+        setInterval={setInterval}
+        market={market}
+        setMarket={setMarket}
+      />
       <TopDashboard />
-      <BottomDashboard interval={interval}/>
+      <BottomDashboard interval={interval} />
       <Signature />
     </div>
   );
