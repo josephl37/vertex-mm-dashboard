@@ -42,6 +42,7 @@ export function timeFormat(interval) {
       new Intl.DateTimeFormat("en-US", {
       hour: "numeric",
       minute: "numeric",
+      hour12: false,
       }).format(t);
     case 604800:
       return (t) =>
@@ -65,6 +66,7 @@ export function timeFormat(interval) {
       new Intl.DateTimeFormat("en-US", {
       hour: "numeric",
       minute: "numeric",
+      hour12: false,
       }).format(t);
   }
 }
