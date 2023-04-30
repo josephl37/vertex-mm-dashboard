@@ -8,8 +8,9 @@ import {
 } from "recharts";
 import { useSelector } from "react-redux";
 import { convertData, timeFormat, getFormattedTime } from "../../utils";
+import numeral from "numeral";
 
-function RewardShare({ interval }) {
+function MakerFee({ interval }) {
   const response = useSelector((state) => state.data.makers);
   const data = response ? convertData(response, "maker_fee") : null;
 
@@ -51,7 +52,11 @@ function RewardShare({ interval }) {
               domain={["dataMin", "dataMax"]}
               tickFormatter={timeFormat(interval)}
             />
-            <YAxis tickFormatter={(c) => `${c * 100}%`} />
+            <YAxis
+              tickFormatter={(c) => numeral(c).format("0%")}
+              domain={[0, 1]}
+              ticks={[0, .25, .50, .75, 1]}
+            />
             <Tooltip
               content={<CustomTooltip interval={interval} colors={colors} />}
             />
@@ -98,7 +103,7 @@ function CustomTooltip({ active, payload, label, interval, colors }) {
                   className="w-4 h-4 mr-4 mt-1"
                   style={{ backgroundColor: color }}
                 ></span>
-                {entry.name}: {(entry.value * 100).toFixed(2)}%
+                {entry.name}: {numeral(entry.value).format("0.00%")}
               </div>
             ))
         ) : (
@@ -111,4 +116,4 @@ function CustomTooltip({ active, payload, label, interval, colors }) {
   return null;
 }
 
-export default RewardShare;
+export default MakerFee;

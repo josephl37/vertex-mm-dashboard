@@ -2,7 +2,7 @@ import { Tooltip } from "react-tooltip";
 import infoSvg from "../public/information-circle.svg";
 import ExpectedRewards from "./charts/expectedRewards";
 import RewardShare from "./charts/rewardShare";
-import MakerVolume from "./charts/makerVolume";
+import MakerFee from "./charts/makerFee";
 import MarketUptime from "./charts/marketUptime";
 import SumQScore from "./charts/sumQscore";
 import QScore from "./charts/qScore";
@@ -38,14 +38,14 @@ function BottomDashboard({interval}) {
       </div>
       <div className="bg-gray-3 border border-gray-2 rounded">
         <div className="flex justify-between my-2 mx-2">
-          <p className="text-gray-1 font-medium">Maker Volume for Market (%)</p>
+          <p className="text-gray-1 font-medium">Maker Fee for Market (%)</p>
           <img src={infoSvg} alt="info" 
           data-tooltip-id="chart-tooltip"
-          data-tooltip-html="Shows the volume (%) of each MM<br />for each market in the current epoch."
+          data-tooltip-html="Shows the maker fee (%) of each MM<br />for each market in the current epoch."
           />
         </div>
         <div className="h-96 w-full">
-          <MakerVolume interval={interval}/>
+          <MakerFee interval={interval}/>
         </div>
       </div>
       <div className="bg-gray-3 border border-gray-2 rounded">

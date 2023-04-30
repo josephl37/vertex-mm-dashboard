@@ -8,6 +8,7 @@ import {
 } from "recharts";
 import { useSelector } from "react-redux";
 import { convertData, timeFormat, getFormattedTime } from "../../utils";
+import numeral from "numeral";
 
 function SumQScore({ interval }) {
   const response = useSelector((state) => state.data.makers);
@@ -51,9 +52,7 @@ function SumQScore({ interval }) {
               domain={["dataMin", "dataMax"]}
               tickFormatter={timeFormat(interval)}
             />
-            <YAxis
-              tickFormatter={(c) => c.toString().replace(/000000$/, "M")}
-            />
+            <YAxis tickFormatter={(c) => numeral(c).format("0,0e+0")} />
             <Tooltip
               content={<CustomTooltip interval={interval} colors={colors} />}
             />
@@ -100,7 +99,7 @@ function CustomTooltip({ active, payload, label, interval, colors }) {
                   className="w-4 h-4 mr-4 mt-1"
                   style={{ backgroundColor: color }}
                 ></span>
-                {entry.name}: {entry.value}
+                {entry.name}: {numeral(entry.value).format("0.00e+0")}
               </div>
             ))
         ) : (
