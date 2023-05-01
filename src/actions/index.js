@@ -1,6 +1,7 @@
 import axios from "axios";
 import { getCurrentEpoch } from "../utils";
 export const FETCH_DATA = "FETCH_DATA";
+export const RESTRICT_USER = "RESTRICT_USER";
 
 const base = "https://prod.vertexprotocol-backend.com";
 
@@ -25,5 +26,10 @@ export function fetchData(market, interval) {
           payload: response.data
         });
       })
-  };
+      .catch(error => {
+        dispatch({
+          type: RESTRICT_USER,
+          payload: error
+        });
+      });  };
 }
