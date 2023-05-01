@@ -1,6 +1,7 @@
 import { Tooltip } from "react-tooltip";
 import infoSvg from "../public/information-circle.svg";
 import { useSelector } from "react-redux";
+import { getCurrentEpoch } from "../utils";
 
 function TopDashboard() {
   const data = useSelector((state) => state.data);
@@ -18,7 +19,7 @@ function TopDashboard() {
           />
         </div>
         <div className="flex justify-center mt-4 mb-6">
-          <p className="text-white text-6xl font-medium">1</p>
+          <p className="text-white text-6xl font-medium">{getCurrentEpoch()}</p>
         </div>
       </div>
       <div className="bg-gray-3 border border-gray-2 rounded">

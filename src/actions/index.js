@@ -1,13 +1,15 @@
 import axios from "axios";
+import { getCurrentEpoch } from "../utils";
 export const FETCH_DATA = "FETCH_DATA";
 
-const base = "https://test.vertexprotocol-backend.com";
+const base = "https://prod.vertexprotocol-backend.com";
 
 export function fetchData(market, interval) {
+  const epoch = getCurrentEpoch();
   return dispatch => {
     axios.post(`${base}/indexer`, {
       maker_statistics: {
-        epoch: 2,
+        epoch: epoch,
         product_id: market,
         interval: interval
       }
@@ -17,6 +19,7 @@ export function fetchData(market, interval) {
       }
     })
       .then(response => {
+        console.log(response);
         dispatch({
           type: FETCH_DATA,
           payload: response.data

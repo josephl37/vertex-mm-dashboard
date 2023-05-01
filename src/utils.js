@@ -95,3 +95,12 @@ export function getFormattedTime(interval) {
       });
   }
 }
+
+export function getCurrentEpoch() {
+  const startTime = 1682514000 * 1000; // in miliseconds
+  const epochDuration = 2419200 * 1000; // in miliseconds
+  const currentTime = new Date();
+
+  const epoch = Math.ceil((currentTime - startTime) / epochDuration)
+  return epoch;
+}
