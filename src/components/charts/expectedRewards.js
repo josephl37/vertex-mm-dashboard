@@ -13,7 +13,6 @@ import numeral from "numeral";
 function ExpectedRewards({ interval }) {
   const response = useSelector((state) => state.data.makers);
   const data = response ? convertData(response, "expected_maker_reward") : null;
-
   const keys = data
     ? Object.keys(data[0]).filter((k) => k !== "timestamp")
     : null;

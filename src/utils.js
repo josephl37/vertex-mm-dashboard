@@ -1,30 +1,46 @@
 import truncateEthAddress from "truncate-eth-address";
 
 export function convertData(response, key) {
-  let groupedData = {};
+  // Create a Set of unique addresses
+  let uniqueAddresses = new Set();
+  response.forEach((obj) => {
+    let address = truncateEthAddress(obj.address);
+    uniqueAddresses.add(address);
+  });
 
-  response.forEach(obj => {
+  // Create a map to store the grouped data
+  let groupedData = new Map();
+
+  response.forEach((obj) => {
     let address = truncateEthAddress(obj.address);
 
-    obj.data.forEach(dataObj => {
+    obj.data.forEach((dataObj) => {
       let timestamp = dataObj.timestamp;
       let value = dataObj[key];
 
-      let date = (timestamp * 1000);
+      let date = timestamp * 1000;
 
-      if (!groupedData[date]) {
-        groupedData[date] = {};
+      if (!groupedData.has(date)) {
+        groupedData.set(date, new Map());
       }
 
-      groupedData[date][address] = value;
+      let dataMap = groupedData.get(date);
+      dataMap.set(address, value || "0"); // Set value to 0 if it is missing
     });
   });
 
   let convertedData = [];
 
-  Object.keys(groupedData).forEach(timestamp => {
-    let dataObj = groupedData[timestamp];
-    dataObj.timestamp = timestamp;
+  // Create an array of all unique timestamps in ascending order
+  let allTimestamps = Array.from(groupedData.keys()).sort((a, b) => a - b);
+
+  // Populate convertedData with all timestamps and addresses
+  allTimestamps.forEach((timestamp) => {
+    let dataObj = { timestamp };
+    uniqueAddresses.forEach((address) => {
+      let dataMap = groupedData.get(timestamp);
+      dataObj[address] = dataMap.get(address) || "0"; // Set value to 0 if it is missing
+    });
     convertedData.push(dataObj);
   });
 
