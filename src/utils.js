@@ -11,10 +11,9 @@ export function convertData(response, key) {
   // Create a map to store the grouped data
   let groupedData = new Map();
 
-  let lastKnownValues = {}; // Object to store last known values for each address
-
   response.forEach((obj) => {
     let address = truncateEthAddress(obj.address);
+    let lastValue = null;
 
     obj.data.forEach((dataObj) => {
       let timestamp = dataObj.timestamp;
@@ -27,10 +26,13 @@ export function convertData(response, key) {
       }
 
       let dataMap = groupedData.get(date);
-      let lastKnownValue = lastKnownValues[address] || "0"; // Retrieve last known value or use 0 if it is missing
-      dataMap.set(address, value || lastKnownValue);
 
-      lastKnownValues[address] = value || lastKnownValue; // Update last known value for the address
+      if (value !== null && value !== undefined) {
+        dataMap.set(address, value);
+        lastValue = value;
+      } else if (lastValue !== null) {
+        dataMap.set(address, lastValue);
+      }
     });
   });
 
@@ -40,12 +42,27 @@ export function convertData(response, key) {
   let allTimestamps = Array.from(groupedData.keys()).sort((a, b) => a - b);
 
   // Populate convertedData with all timestamps and addresses
-  allTimestamps.forEach((timestamp) => {
+  allTimestamps.forEach((timestamp, index) => {
     let dataObj = { timestamp };
     uniqueAddresses.forEach((address) => {
       let dataMap = groupedData.get(timestamp);
-      let lastKnownValue = lastKnownValues[address] || "0"; // Retrieve last known value or use 0 if it is missing
-      dataObj[address] = dataMap.get(address) || lastKnownValue;
+      let value = dataMap.get(address);
+
+      if (value !== undefined) {
+        dataObj[address] = value;
+      } else {
+        let previousValue = null;
+        for (let i = index - 1; i >= 0; i--) {
+          let previousTimestamp = allTimestamps[i];
+          let previousDataMap = groupedData.get(previousTimestamp);
+          let previousDataValue = previousDataMap.get(address);
+          if (previousDataValue !== undefined) {
+            previousValue = previousDataValue;
+            break;
+          }
+        }
+        dataObj[address] = previousValue;
+      }
     });
     convertedData.push(dataObj);
   });

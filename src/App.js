@@ -6,9 +6,6 @@ import TopDashboard from "./components/top-dashboard";
 import { useDispatch, useSelector } from "react-redux";
 import Signature from "./components/signature";
 import Restricted from "./components/restricted";
-import { inject } from '@vercel/analytics';
-
-inject();
 
 function App() {
   const [market, setMarket] = useState(1);
