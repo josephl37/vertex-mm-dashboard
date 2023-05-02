@@ -20,7 +20,6 @@ export function fetchData(market, interval) {
       }
     })
       .then(response => {
-        console.log(response);
         dispatch({
           type: FETCH_DATA,
           payload: response.data
