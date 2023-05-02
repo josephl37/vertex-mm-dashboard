@@ -9,7 +9,8 @@ import {
 import { useSelector } from "react-redux";
 import { convertData, timeFormat, getFormattedTime } from "../../utils";
 import numeral from "numeral";
-import loader from "../../public/spinner.svg";
+import Spinner from "../spinner";
+import NoData from "../noData";
 
 function QScore({ interval }) {
   const response = useSelector((state) => state.data.makers);
@@ -29,19 +30,9 @@ function QScore({ interval }) {
   ];
 
   if (loading) {
-    return (
-      <div className="text-gray-1 flex items-center justify-center h-full">
-        <div className="animate-spin">
-          <img src={loader} alt="loader" />
-        </div>
-      </div>
-    );
+    return <Spinner />;
   } else if (data === null) {
-    return (
-      <div className="text-gray-1 flex items-center justify-center h-full">
-        <p className="text-center">Data is unavailable</p>
-      </div>
-    );
+    return <NoData />;
   } else {
     return (
       <>
