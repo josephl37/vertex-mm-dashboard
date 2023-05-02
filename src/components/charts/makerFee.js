@@ -47,7 +47,7 @@ function MakerFee({ interval }) {
           >
             <XAxis
               dataKey="timestamp"
-              scale="time"
+              scale="auto"
               type="number"
               domain={["dataMin", "dataMax"]}
               tickFormatter={timeFormat(interval)}

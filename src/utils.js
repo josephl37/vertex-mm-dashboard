@@ -11,6 +11,8 @@ export function convertData(response, key) {
   // Create a map to store the grouped data
   let groupedData = new Map();
 
+  let lastKnownValues = {}; // Object to store last known values for each address
+
   response.forEach((obj) => {
     let address = truncateEthAddress(obj.address);
 
@@ -25,7 +27,10 @@ export function convertData(response, key) {
       }
 
       let dataMap = groupedData.get(date);
-      dataMap.set(address, value || "0"); // Set value to 0 if it is missing
+      let lastKnownValue = lastKnownValues[address] || "0"; // Retrieve last known value or use 0 if it is missing
+      dataMap.set(address, value || lastKnownValue);
+
+      lastKnownValues[address] = value || lastKnownValue; // Update last known value for the address
     });
   });
 
@@ -39,7 +44,8 @@ export function convertData(response, key) {
     let dataObj = { timestamp };
     uniqueAddresses.forEach((address) => {
       let dataMap = groupedData.get(timestamp);
-      dataObj[address] = dataMap.get(address) || "0"; // Set value to 0 if it is missing
+      let lastKnownValue = lastKnownValues[address] || "0"; // Retrieve last known value or use 0 if it is missing
+      dataObj[address] = dataMap.get(address) || lastKnownValue;
     });
     convertedData.push(dataObj);
   });

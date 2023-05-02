@@ -13,6 +13,7 @@ import numeral from "numeral";
 function ExpectedRewards({ interval }) {
   const response = useSelector((state) => state.data.makers);
   const data = response ? convertData(response, "expected_maker_reward") : null;
+  console.log(data);
   const keys = data
     ? Object.keys(data[0]).filter((k) => k !== "timestamp")
     : null;
@@ -46,7 +47,7 @@ function ExpectedRewards({ interval }) {
           >
             <XAxis
               dataKey="timestamp"
-              scale="time"
+              scale="auto"
               type="number"
               domain={["dataMin", "dataMax"]}
               tickFormatter={timeFormat(interval)}

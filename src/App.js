@@ -12,8 +12,6 @@ function App() {
   const [interval, setInterval] = useState(900);
   const restricted = useSelector((state) => state.restrict);
 
-  console.log(restricted);
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchData(market, interval));
