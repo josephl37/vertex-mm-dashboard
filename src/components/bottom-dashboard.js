@@ -74,7 +74,7 @@ function BottomDashboard({interval}) {
       </div>
       <div className="bg-gray-3 border border-gray-2 rounded">
         <div className="flex justify-between my-2 mx-2">
-          <p className="text-gray-1 font-medium">Sum Q Score</p>
+          <p className="text-gray-1 font-medium">Sum Q Min</p>
           <img src={infoSvg} alt="info"
           data-tooltip-id="chart-tooltip"
           data-tooltip-html="need definition"
