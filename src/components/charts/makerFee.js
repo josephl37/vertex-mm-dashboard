@@ -9,9 +9,11 @@ import {
 import { useSelector } from "react-redux";
 import { convertData, timeFormat, getFormattedTime } from "../../utils";
 import numeral from "numeral";
+import loader from "../../public/spinner.svg";
 
 function MakerFee({ interval }) {
   const response = useSelector((state) => state.data.makers);
+  const loading = useSelector((state) => state.loading); 
   const data = response ? convertData(response, "maker_fee") : null;
 
   const keys = data
@@ -26,7 +28,16 @@ function MakerFee({ interval }) {
     "#53AC8C",
   ];
 
-  if (data === null) {
+
+  if (loading) {
+    return (
+      <div className="text-gray-1 flex items-center justify-center h-full">
+        <div className="animate-spin">
+          <img src={loader} alt="loader" />
+        </div>
+      </div>
+    );
+  } else if (data === null) {
     return (
       <div className="text-gray-1 flex items-center justify-center h-full">
         <p className="text-center">Data is unavailable</p>

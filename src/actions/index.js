@@ -2,12 +2,14 @@ import axios from "axios";
 import { getCurrentEpoch } from "../utils";
 export const FETCH_DATA = "FETCH_DATA";
 export const RESTRICT_USER = "RESTRICT_USER";
+export const SET_LOADING = "SET_LOADING";
 
 const base = "https://prod.vertexprotocol-backend.com";
 
 export function fetchData(market, interval) {
   const epoch = getCurrentEpoch();
   return dispatch => {
+    dispatch({ type: SET_LOADING, payload: true });
     axios.post(`${base}/indexer`, {
       maker_statistics: {
         epoch: epoch,
@@ -20,12 +22,14 @@ export function fetchData(market, interval) {
       }
     })
       .then(response => {
+        dispatch({ type: SET_LOADING, payload: false });
         dispatch({
           type: FETCH_DATA,
           payload: response.data
         });
       })
       .catch(error => {
+        dispatch({ type: SET_LOADING, payload: false });
         dispatch({
           type: RESTRICT_USER,
           payload: error
