@@ -29,7 +29,8 @@ function TopDashboard() {
             src={infoSvg}
             alt="info"
             data-tooltip-id="my-tooltip"
-            data-tooltip-html="A dynamic, relative measure of how much<br /> $VRTX is earned for a constant level of<br />liquidity (a constant depth and spread). A<br />value of 1.00 is average. To mazimize<br />rewards per liquidity provided, one would<br />provide liquidity into the markets with the<br />highest reward coefficient."
+            data-tooltip-html="A dynamic, relative measure of how<br />much $VRTX is earned for each market.<br />A value of 1.00 is average, the more tokens<br />allocated to a market, the higher reward<br />coefficient it has.
+            "
           />
         </div>
         <div className="flex justify-center mt-4 mb-6">

@@ -65,7 +65,8 @@ function BottomDashboard({interval}) {
           <p className="text-gray-1 font-medium">Per-Minute Q Score</p>
           <img src={infoSvg} alt="info"
           data-tooltip-id="chart-tooltip"
-          data-tooltip-html="A representation of a MM’s two-sided<br/>quoting performance for each market<br />in the current epoch. The amount of<br />$VRTX earned by MMs is proportional<br />to their relative Q-score."
+          data-tooltip-html="A combination of Uptime, Sum Q Min,<br />and Maker Fee to evaluate MM's<br />contribution to market making. The<br />amount of $VRTX earned by MMs is<br />proportional to their relative Q-score.
+          "
           />
         </div>
         <div className="h-96 w-full">
@@ -77,7 +78,8 @@ function BottomDashboard({interval}) {
           <p className="text-gray-1 font-medium">Sum Q Min</p>
           <img src={infoSvg} alt="info"
           data-tooltip-id="chart-tooltip"
-          data-tooltip-html="need definition"
+          data-tooltip-html="A representation of an MM’s<br />two-sided quoting performance<br />for each market in the current<br />epoch.
+          "
           />
         </div>
         <div className="h-96 w-full">
