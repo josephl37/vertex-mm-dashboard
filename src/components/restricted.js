@@ -10,9 +10,7 @@ const Restricted = () => {
         <p className="text-white text-center text-4xl font-bold">Notice</p>
         <div className="mt-8 flex justify-center">
           <p className="text-white text-center whitespace-normal">
-            It appears that you are accessing Vertex from a restricted
-            territory. Unfortunately, we are not able to support users from
-            restricted territories which include the United States at this time. 
+          Unfortunately, we are not able to support users from restricted territories at this time. Please refer to the Vertex Terms of Service for more information.
           </p>
         </div>
       </div>
