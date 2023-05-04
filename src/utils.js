@@ -17,7 +17,7 @@ export function convertData(response, key) {
 
     obj.data.forEach((dataObj) => {
       let timestamp = dataObj.timestamp;
-      let value = dataObj[key];
+      let value = parseFloat(dataObj[key]);
 
       let date = timestamp * 1000;
 
