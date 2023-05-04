@@ -6,36 +6,24 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { useSelector } from "react-redux";
-import { convertData, timeFormat, getFormattedTime } from "../../utils";
+import { timeFormat, getFormattedTime, convertData } from "../../utils";
 import numeral from "numeral";
-import Spinner from "../spinner";
 import NoData from "../noData";
+import { useSelector } from "react-redux";
 
-function RewardShare({ interval }) {
+function ERChart({ interval, colors }) {
   const response = useSelector((state) => state.data.makers);
-  const loading = useSelector((state) => state.loading);
-  const data = response ? convertData(response, "maker_share") : null;
+  const data = response ? convertData(response, "expected_maker_reward") : null;
 
   const keys = data
     ? Object.keys(data[0]).filter((k) => k !== "timestamp")
     : null;
-  const colors = [
-    "#4C289F",
-    "#CDADEF",
-    "#E4B50E",
-    "#AF5067",
-    "#CF96A4",
-    "#53AC8C",
-  ];
 
-  if (loading) {
-    return <Spinner />;
-  } else if (data === null) {
+  if (data === null) {
     return <NoData />;
   } else {
     return (
-      <>
+      <div className="h-96 w-full">
         <ResponsiveContainer>
           <AreaChart
             data={data}
@@ -53,11 +41,7 @@ function RewardShare({ interval }) {
               domain={["dataMin", "dataMax"]}
               tickFormatter={timeFormat(interval)}
             />
-            <YAxis
-              tickFormatter={(c) => numeral(c).format("0%")}
-              domain={[0, 1]}
-              ticks={[0, 0.25, 0.5, 0.75, 1]}
-            />
+            <YAxis tickFormatter={(c) => numeral(c).format("0.a")} />
             <Tooltip
               content={<CustomTooltip interval={interval} colors={colors} />}
             />
@@ -72,7 +56,7 @@ function RewardShare({ interval }) {
             ))}
           </AreaChart>
         </ResponsiveContainer>
-      </>
+      </div>
     );
   }
 }
@@ -104,7 +88,7 @@ function CustomTooltip({ active, payload, label, interval, colors }) {
                   className="w-4 h-4 mr-4 mt-1"
                   style={{ backgroundColor: color }}
                 ></span>
-                {entry.name}: {numeral(entry.value).format("0.00%")}
+                {entry.name}: {numeral(entry.value).format("0.00a")}
               </div>
             ))
         ) : (
@@ -117,4 +101,4 @@ function CustomTooltip({ active, payload, label, interval, colors }) {
   return null;
 }
 
-export default RewardShare;
+export default ERChart;

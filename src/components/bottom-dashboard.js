@@ -1,103 +1,20 @@
 import { Tooltip } from "react-tooltip";
-import infoSvg from "../public/information-circle.svg";
-import ExpectedRewards from "./charts/expectedRewards";
-import RewardShare from "./charts/rewardShare";
-import MakerFee from "./charts/makerFee";
-import MarketUptime from "./charts/marketUptime";
-import SumQScore from "./charts/sumQscore";
-import QScore from "./charts/qScore";
+import ExpectedRewards from "./data/expectedRewards";
+import RewardShare from "./data/rewardShare";
+import MakerFee from "./data/makerFee";
+import MarketUptime from "./data/marketUptime";
+import SumQScore from "./data/sumQscore";
+import QScore from "./data/qScore";
 
 function BottomDashboard({ interval }) {
   return (
     <div className="grid md:grid-cols-2 grid-cols-1 gap-4 mt-4">
-      <div className="bg-gray-3 border border-gray-2 rounded">
-        <div className="flex justify-between my-2 mx-2">
-          <p className="text-gray-1 font-medium">
-            Expected Rewards per MM ($VRTX)
-          </p>
-          <img
-            src={infoSvg}
-            alt="info"
-            data-tooltip-id="chart-tooltip"
-            data-tooltip-html="The expected rewards ($VRTX)<br />per MM for each market in the<br />current epoch."
-          />
-        </div>
-        <div className="h-96 w-full">
-          <ExpectedRewards interval={interval} />
-        </div>
-      </div>
-      <div className="bg-gray-3 border border-gray-2 rounded">
-        <div className="flex justify-between my-2 mx-2">
-          <p className="text-gray-1 font-medium">Reward Share for Market (%)</p>
-          <img
-            src={infoSvg}
-            alt="info"
-            data-tooltip-id="chart-tooltip"
-            data-tooltip-html="Shows the relative Q-scores for each<br />MM for each market in the current epoch.<br />Each datapoint compares the cumulative<br />scores up to that point (from the start<br />of the epoch)."
-          />
-        </div>
-        <div className="h-96 w-full">
-          <RewardShare interval={interval} />
-        </div>
-      </div>
-      <div className="bg-gray-3 border border-gray-2 rounded">
-        <div className="flex justify-between my-2 mx-2">
-          <p className="text-gray-1 font-medium">Maker Fee for Market (%)</p>
-          <img
-            src={infoSvg}
-            alt="info"
-            data-tooltip-id="chart-tooltip"
-            data-tooltip-html="Shows the maker fee (%) of each MM<br />for each market in the current epoch."
-          />
-        </div>
-        <div className="h-96 w-full">
-          <MakerFee interval={interval} />
-        </div>
-      </div>
-      <div className="bg-gray-3 border border-gray-2 rounded">
-        <div className="flex justify-between my-2 mx-2">
-          <p className="text-gray-1 font-medium">Uptime for Market (%)</p>
-          <img
-            src={infoSvg}
-            alt="info"
-            data-tooltip-id="chart-tooltip"
-            data-tooltip-html="The uptime of each MM for each<br />market in the current epoch."
-          />
-        </div>
-        <div className="h-96 w-full">
-          <MarketUptime interval={interval} />
-        </div>
-      </div>
-      <div className="bg-gray-3 border border-gray-2 rounded">
-        <div className="flex justify-between my-2 mx-2">
-          <p className="text-gray-1 font-medium">Per-Minute Q Score</p>
-          <img
-            src={infoSvg}
-            alt="info"
-            data-tooltip-id="chart-tooltip"
-            data-tooltip-html="A combination of Uptime, Sum Q Min,<br />and Maker Fee to evaluate MM's<br />contribution to market making. The<br />amount of $VRTX earned by MMs is<br />proportional to their relative Q-score.
-          "
-          />
-        </div>
-        <div className="h-96 w-full">
-          <QScore interval={interval} />
-        </div>
-      </div>
-      <div className="bg-gray-3 border border-gray-2 rounded">
-        <div className="flex justify-between my-2 mx-2">
-          <p className="text-gray-1 font-medium">Sum Q Min</p>
-          <img
-            src={infoSvg}
-            alt="info"
-            data-tooltip-id="chart-tooltip"
-            data-tooltip-html="A representation of an MM’s<br />two-sided quoting performance<br />for each market in the current<br />epoch.
-          "
-          />
-        </div>
-        <div className="h-96 w-full">
-          <SumQScore interval={interval} />
-        </div>
-      </div>
+      <ExpectedRewards interval={interval} />
+      <RewardShare interval={interval} />
+      <MakerFee interval={interval} />
+      <MarketUptime interval={interval} />
+      <QScore interval={interval} />
+      <SumQScore interval={interval} />
       <Tooltip
         id="chart-tooltip"
         style={{

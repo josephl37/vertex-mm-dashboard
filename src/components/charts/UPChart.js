@@ -1,44 +1,31 @@
 import {
-  AreaChart,
-  Area,
+  LineChart,
   XAxis,
   YAxis,
   Tooltip,
   ResponsiveContainer,
+  Line,
 } from "recharts";
 import { useSelector } from "react-redux";
 import { convertData, timeFormat, getFormattedTime } from "../../utils";
 import numeral from "numeral";
-import Spinner from "../spinner";
 import NoData from "../noData";
 
-function MakerFee({ interval }) {
+function UPChart({ interval, colors }) {
   const response = useSelector((state) => state.data.makers);
-  const loading = useSelector((state) => state.loading); 
-  const data = response ? convertData(response, "maker_fee") : null;
+  const data = response ? convertData(response, "uptime") : null;
 
   const keys = data
     ? Object.keys(data[0]).filter((k) => k !== "timestamp")
     : null;
-  const colors = [
-    "#4C289F",
-    "#CDADEF",
-    "#E4B50E",
-    "#AF5067",
-    "#CF96A4",
-    "#53AC8C",
-  ];
 
-
-  if (loading) {
-    return <Spinner />;
-  } else if (data === null) {
+  if (data === null) {
     return <NoData />;
   } else {
     return (
-      <>
+      <div className="h-96 w-full">
         <ResponsiveContainer>
-          <AreaChart
+          <LineChart
             data={data}
             margin={{
               top: 20,
@@ -57,23 +44,23 @@ function MakerFee({ interval }) {
             <YAxis
               tickFormatter={(c) => numeral(c).format("0%")}
               domain={[0, 1]}
-              ticks={[0, .25, .50, .75, 1]}
+              ticks={[0, 0.25, 0.5, 0.75, 1]}
             />
             <Tooltip
               content={<CustomTooltip interval={interval} colors={colors} />}
             />
             {keys.map((key, index) => (
-              <Area
+              <Line
                 key={key}
                 dataKey={key}
-                stackId="1"
+                dot={false}
                 stroke={colors[index % colors.length]}
                 fill={colors[index % colors.length]}
               />
             ))}
-          </AreaChart>
+          </LineChart>
         </ResponsiveContainer>
-      </>
+      </div>
     );
   }
 }
@@ -118,4 +105,4 @@ function CustomTooltip({ active, payload, label, interval, colors }) {
   return null;
 }
 
-export default MakerFee;
+export default UPChart;

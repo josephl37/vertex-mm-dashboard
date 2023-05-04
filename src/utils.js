@@ -143,3 +143,13 @@ export function getCurrentEpoch() {
   const epoch = Math.ceil((currentTime - startTime) / epochDuration)
   return epoch;
 }
+
+export function formatTable(data) {
+  const lastData = data ? data[data.length - 1] : null;
+
+  if (lastData) {
+    delete lastData.timestamp;
+  }
+
+  return lastData;
+}
