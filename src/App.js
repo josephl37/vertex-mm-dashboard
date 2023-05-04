@@ -9,7 +9,7 @@ import Restricted from "./components/restricted";
 
 function App() {
   const [market, setMarket] = useState(1);
-  const [interval, setInterval] = useState(900);
+  const [interval, setInterval] = useState(3600);
   const restricted = useSelector((state) => state.restrict);
 
   const dispatch = useDispatch();
